@@ -42,8 +42,9 @@ export default defineComponent({
       todoItems.push(todoItemObj);
     };//addTodo    
 
-    const removeTodo = (todoItemStr: string, index: number) => {
-      localStorage.removeItem(todoItemStr);
+    const removeTodo = (todoItem: TodoItem, index: number) => {
+      const { item } = todoItem
+      localStorage.removeItem(item);
       todoItems.splice(index, 1);
     }
 

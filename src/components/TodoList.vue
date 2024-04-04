@@ -5,7 +5,7 @@
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"
                     @click="toggleComplete(todo)"></i>
                 <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
-                <span class="removeBtn" @click="removeTodo(todo.item, idx)">
+                <span class="removeBtn" @click="removeTodo(todo, idx)">
                     <i class="fas fa-trash-alt"></i>
                 </span>
             </li>
@@ -26,7 +26,7 @@ const props = defineProps({
 
 const emit = defineEmits(["remove:todo"])
 
-const removeTodo = (todoItem: string, index: number) => {
+const removeTodo = (todoItem: TodoItem, index: number) => {
     emit('remove:todo', todoItem, index)   
 }
 
