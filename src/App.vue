@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, onBeforeMount, reactive } from 'vue';
 import TodoHeader from '@/components/TodoHeader.vue';
 import TodoInput from '@/components/TodoInput.vue'
 import TodoList from '@/components/TodoList.vue'
@@ -22,9 +22,21 @@ export default defineComponent({
   },
 
   setup() {
-      const todoItems = reactive<TodoItem[]>([])
+    const todoItems = reactive<TodoItem[]>([])
 
-      return { todoItems }
+    onBeforeMount(() => {
+      if (localStorage.length > 0) {
+        for (var i = 0; i < localStorage.length; i++) {
+          const storageKey = localStorage.key(i) as string;
+          const itemJson = localStorage.getItem(storageKey) as string | null;
+          if (itemJson) {
+            todoItems.push(JSON.parse(itemJson));
+          } //if
+        } //for
+      } //if
+    });
+
+    return { todoItems }
   },
 
 });
@@ -57,7 +69,9 @@ button {
 .shadow {
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
 }
-i,span {
-    cursor: pointer;
+
+i,
+span {
+  cursor: pointer;
 }
 </style>
