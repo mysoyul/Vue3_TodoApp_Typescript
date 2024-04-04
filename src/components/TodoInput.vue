@@ -9,6 +9,7 @@
 import { ref } from 'vue';
 
 const newTodoItem = ref("")
+const emit = defineEmits(["input:todo"])
 
 </script>
 
