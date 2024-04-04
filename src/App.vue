@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList></TodoList>
+    <TodoInput @add:todo="addTodo"></TodoInput>
+    <TodoList :todo-array="todoItems"></TodoList>
     <TodoFooter></TodoFooter>
   </div>
 </template>
@@ -36,7 +36,13 @@ export default defineComponent({
       } //if
     });
 
-    return { todoItems }
+    const addTodo = (todoItemStr: string) => {
+      const todoItemObj = { completed: false, item: todoItemStr };
+      localStorage.setItem(todoItemStr, JSON.stringify(todoItemObj));
+      todoItems.push(todoItemObj);
+    };//addTodo    
+
+    return { todoItems, addTodo }
   },
 
 });

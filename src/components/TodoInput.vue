@@ -11,7 +11,7 @@
 import { ref, watchEffect } from 'vue';
 
 const newTodoItem = ref("")
-const emit = defineEmits(["input:todo"])
+const emit = defineEmits(["input:todo","add:todo"])
 
 const input = ref<HTMLInputElement | null>(null);
 watchEffect(() => {
@@ -27,12 +27,9 @@ const handleInput = (event: Event) => {
     newTodoItem.value = todoText
 }
 const addTodo = () => {
-    // const todoItem = newTodoItem.value
-    // localStorage.setItem(todoItem, todoItem)
     if (newTodoItem.value !== "") {
         const todoItem = newTodoItem.value
-        const todoItemObj = { completed: false, item: todoItem }
-        localStorage.setItem(todoItem, JSON.stringify(todoItemObj))
+        emit('add:todo', todoItem)
         clearInput()
     }
 }
