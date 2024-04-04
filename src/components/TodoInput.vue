@@ -1,7 +1,7 @@
 <template>
     <div>
         <input type="text" :value="newTodoItem" @input="handleInput">
-        <button>추가</button>
+        <button @click="addTodo">추가</button>
     </div>
 </template>
 
@@ -16,6 +16,11 @@ const handleInput = (event: Event) => {
     if (!todoText) return
     emit("input:todo", todoText)
     newTodoItem.value = todoText
+}
+const addTodo = () => {
+    const todoItem = newTodoItem.value
+    localStorage.setItem(todoItem, todoItem)
+    newTodoItem.value = ""
 }
 </script>
 
