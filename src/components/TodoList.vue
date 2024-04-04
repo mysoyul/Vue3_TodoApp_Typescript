@@ -3,7 +3,7 @@
         <ul>
             <li v-for="(todo, idx) in props.todoArray" :key="idx" class="shadow">
                 <i class="fas fa-check checkBtn" :class="{ checkBtnCompleted: todo.completed }"
-                    @click="toggleComplete(todo)"></i>
+                    @click="toggleComplete(todo, idx)"></i>
                 <span :class="{ textCompleted: todo.completed }">{{ todo.item }}</span>
                 <span class="removeBtn" @click="removeTodo(todo, idx)">
                     <i class="fas fa-trash-alt"></i>
@@ -24,17 +24,14 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(["remove:todo"])
+const emit = defineEmits(["remove:todo","toggle:todo"])
 
 const removeTodo = (todoItem: TodoItem, index: number) => {
     emit('remove:todo', todoItem, index)   
 }
 
-const toggleComplete = (todoItem: TodoItem) => {
-    const { completed, item } = todoItem
-    todoItem.completed = !completed;
-    localStorage.removeItem(item);
-    localStorage.setItem(item, JSON.stringify(todoItem));
+const toggleComplete = (todoItem: TodoItem, index: number) => {
+    emit('toggle:todo', todoItem, index)
 }
 
 </script>
