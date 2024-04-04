@@ -1,6 +1,6 @@
 <template>
     <div class="inputBox shadow">
-        <input type="text" :value="newTodoItem" @input="handleInput" @keyup.enter="addTodo">
+        <input type="text" :value="newTodoItem" @input="handleInput" @keyup.enter="addTodo" ref="input">
         <span class="addContainer" @click="addTodo">
             <i class="fas fa-plus addBtn"></i>
         </span>
@@ -8,10 +8,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 
 const newTodoItem = ref("")
 const emit = defineEmits(["input:todo"])
+
+const input = ref<HTMLInputElement | null>(null);
+watchEffect(() => {
+    if (input.value) {
+        input.value.focus()
+    }
+});
 
 const handleInput = (event: Event) => {
     const todoText = (event.target as HTMLInputElement).value
