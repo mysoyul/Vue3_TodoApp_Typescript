@@ -8,17 +8,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import TodoHeader from '@/components/TodoHeader.vue';
 import TodoInput from '@/components/TodoInput.vue'
 import TodoList from '@/components/TodoList.vue'
 import TodoFooter from '@/components/TodoFooter.vue'
+import TodoItem from './types/TodoItem';
 
 export default defineComponent({
   name: 'App',
   components: {
     TodoHeader, TodoInput, TodoList, TodoFooter
-  }
+  },
+
+  setup() {
+      const todoItems = reactive<TodoItem[]>([])
+
+      return { todoItems }
+  },
+
 });
 </script>
 
