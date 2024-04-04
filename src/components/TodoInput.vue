@@ -1,6 +1,6 @@
 <template>
     <div>
-        <input type="text" :value="newTodoItem">
+        <input type="text" :value="newTodoItem" @input="handleInput">
         <button>추가</button>
     </div>
 </template>
