@@ -68,7 +68,21 @@ export const store = createStore({
                         console.error(error);
                     }
                 });
-        },
+        }, //toggleTodo
+        clearTodo({ commit }) {
+            http
+                .delete('/todos')
+                .then(r => r.data)
+                .then(items => commit('setTodoItems', items))
+                .catch(error => {
+                    if (axios.isAxiosError(error)) {
+                        console.log(error?.response?.status +
+                            ' : ' + error.message)
+                    } else {
+                        console.error(error);
+                    }
+                });
+        }, //clearTodo
 
     },
     mutations: {
