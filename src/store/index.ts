@@ -40,7 +40,21 @@ export const store = createStore({
                         console.error(error);
                     }
                 });
-        },
+        }, //addTodo
+        removeTodo({ commit }, payload) {
+            http
+                .delete(`/todos/${payload.id}`)
+                .then(r => r.data)
+                .then(items => commit('setTodoItems', items))
+                .catch(error => {
+                    if (axios.isAxiosError(error)) {
+                        console.log(error?.response?.status +
+                            ' : ' + error.message)
+                    } else {
+                        console.error(error);
+                    }
+                });
+        }, //removeTodo
     },
     mutations: {
         setTodoItems(state: State, items: TodoItem[]) {
