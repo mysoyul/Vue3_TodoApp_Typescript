@@ -21,11 +21,13 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 import MyModal from './common/MyModal.vue'
+import { useStore } from "vuex"
 
+const store = useStore()
 const newTodoItem = ref("")
 const showModal = ref(false)
 
-const emit = defineEmits(["input:todo", "add:todo"])
+const emit = defineEmits(["input:todo"])
 
 const input = ref<HTMLInputElement | null>(null);
 watchEffect(() => {
@@ -43,7 +45,7 @@ const handleInput = (event: Event) => {
 const addTodo = () => {
     if (newTodoItem.value !== "") {
         const todoItem = newTodoItem.value
-        emit('add:todo', todoItem)
+        store.commit("addTodo", todoItem)
         clearInput()
     } else {
         showModal.value = !showModal.value
