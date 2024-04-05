@@ -4,12 +4,12 @@
         <form @submit="onSubmit">
             <div class="form-group">
                 <label><strong>Email : </strong></label>
-                <input type="email" v-model="email"  class="form-control" />
+                <input type="email" v-model="email" v-bind="emailProps" class="form-control" />
                 <div v-show="errors.email" class="alert alert-danger">{{ errors.email }}</div>
             </div>
             <div class="form-group">
                 <label><strong>Title : </strong></label>
-                <input type="text" v-model="title"  class="form-control" />
+                <input type="text" v-model="title" v-bind="titleProps" class="form-control" />
                 <div v-show="errors.title" class="alert alert-danger">{{ errors.title }}</div>
             </div>
             <div class="mt-4 text-center">
@@ -28,7 +28,7 @@ import * as yup from 'yup'
 const store = useStore()
 const router = useRouter()
 
-const { errors, handleSubmit, defineInputBinds } = useForm({
+const { errors, handleSubmit, defineField } = useForm({
   validationSchema: yup.object({
     email: yup.string().email().required(),
     title: yup.string().required(),
@@ -42,8 +42,16 @@ const onSubmit = handleSubmit(values => {
     });
 });
 
-const email = defineInputBinds('email');
-const title = defineInputBinds('title');
+const [email, emailProps] = defineField('email', {
+  props: state => ({
+    error: state.errors[0],
+  }),
+});
+const [title, titleProps] = defineField('title', {
+  props: state => ({
+    error: state.errors[1],
+  }),
+});
   
 </script>
 
