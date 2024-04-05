@@ -56,9 +56,9 @@ const clearInput = () => {
 </script>
 
 <style scoped>
-input:focus {
-    outline: none;
-}
+/* input {
+  outline: none;
+} */
 
 .inputBox {
     background: white;
@@ -70,7 +70,13 @@ input:focus {
 .inputBox input {
     border-style: none;
     font-size: 0.9rem;
-    width: 80%;
+    width: 89%;
+    height: 81%;
+    border-radius: 5px;
+}
+
+.inputBox input:focus {
+    outline: 0.5px dotted #6478FB;
 }
 
 .addContainer {
