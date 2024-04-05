@@ -72,7 +72,7 @@ const clearInput = () => {
 .inputBox input {
     border-style: none;
     font-size: 0.9rem;
-    width: 89%;
+    width: 85%;
     height: 81%;
     border-radius: 5px;
 }
