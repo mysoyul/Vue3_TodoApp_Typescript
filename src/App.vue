@@ -2,7 +2,7 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput @add:todo="addTodo"></TodoInput>
-    <TodoList :todo-array="todoItems" @remove:todo="removeTodo" @toggle:todo="toggleTodo"></TodoList>
+    <TodoList  @remove:todo="removeTodo" @toggle:todo="toggleTodo"></TodoList>
     <TodoFooter @clear:todo="clearTodo"></TodoFooter>
   </div>
 </template>
@@ -23,18 +23,6 @@ export default defineComponent({
 
   setup() {
     const todoItems = reactive<TodoItem[]>([])
-
-    onBeforeMount(() => {
-      if (localStorage.length > 0) {
-        for (var i = 0; i < localStorage.length; i++) {
-          const storageKey = localStorage.key(i) as string;
-          const itemJson = localStorage.getItem(storageKey) as string | null;
-          if (itemJson) {
-            todoItems.push(JSON.parse(itemJson));
-          } //if
-        } //for
-      } //if
-    });
 
     const addTodo = (todoItemStr: string) => {
       const todoItemObj = { completed: false, item: todoItemStr };
