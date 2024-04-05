@@ -2,13 +2,13 @@
   <div id="app">
     <TodoHeader></TodoHeader>
     <TodoInput></TodoInput>
-    <TodoList  @toggle:todo="toggleTodo"></TodoList>
+    <TodoList></TodoList>
     <TodoFooter @clear:todo="clearTodo"></TodoFooter>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeMount, reactive } from 'vue';
+import { defineComponent, reactive } from 'vue';
 import TodoHeader from '@/components/TodoHeader.vue';
 import TodoInput from '@/components/TodoInput.vue'
 import TodoList from '@/components/TodoList.vue'
@@ -24,20 +24,12 @@ export default defineComponent({
   setup() {
     const todoItems = reactive<TodoItem[]>([])
 
-    const toggleTodo = (todoItem: TodoItem, index: number) => {
-      const { item, completed } = todoItem
-      todoItems[index].completed = !completed;
-
-      localStorage.removeItem(item);
-      localStorage.setItem(item, JSON.stringify(todoItems[index]));
-    };
-
     const clearTodo = () => {
       localStorage.clear()
       todoItems.splice(0)
     }
 
-    return { todoItems, toggleTodo, clearTodo }
+    return { todoItems, clearTodo }
   },
 
 });
