@@ -4,12 +4,12 @@
         <form @submit="onSubmit">
             <div class="form-group">
                 <label><strong>Email : </strong></label>
-                <input type="email" v-model="email" v-bind="emailAttrs" class="form-control" />
+                <input type="email" v-model="email"  class="form-control" />
                 <div v-show="errors.email" class="alert alert-danger">{{ errors.email }}</div>
             </div>
             <div class="form-group">
                 <label><strong>Title : </strong></label>
-                <input type="text" v-model="title" v-bind="titleAttrs" class="form-control" />
+                <input type="text" v-model="title"  class="form-control" />
                 <div v-show="errors.title" class="alert alert-danger">{{ errors.title }}</div>
             </div>
             <div class="mt-4 text-center">
